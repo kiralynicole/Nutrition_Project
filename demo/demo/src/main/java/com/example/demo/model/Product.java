@@ -3,6 +3,7 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -21,6 +22,7 @@ public class Product {
     @Column(unique=true, nullable=false)
     private String name;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Category category;
 
@@ -31,7 +33,7 @@ public class Product {
     private int stock;
 
     @Column(nullable = false)
-    private Date expirationDate;
+    private LocalDate expirationDate;
 
    // @Column(nullable = false)
    // private String image;

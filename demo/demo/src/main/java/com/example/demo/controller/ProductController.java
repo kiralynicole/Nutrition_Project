@@ -1,13 +1,11 @@
 package com.example.demo.controller;
 
+import com.example.demo.exception.ProductException;
 import com.example.demo.model.Product;
 import com.example.demo.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductController {
 
-   private ProductService productService;
+   private final ProductService productService;
 
     @GetMapping("/{id}")
     public Product findProductById(@PathVariable int id){
@@ -28,10 +26,26 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-    @GetMapping("/{name}")
-    public Product findProductByName(@PathVariable String name){
+    @GetMapping("/findName/{name}")
+    public Product findProductByName(@PathVariable String name) throws ProductException {
         return productService.getProductByName(name);
     }
+
+    @PostMapping("/addProduct")
+        public Product addProduct(@RequestBody Product p){
+            return productService.createProduct(p);
+        }
+
+    @PutMapping("/updateProduct")
+    public Product updateProduct(@RequestBody Product p){
+        return productService.updateProduct(p);
+    }
+
+    @DeleteMapping("/deleteProduct/{id}")
+    public String deleteProduct(@PathVariable int id){
+        return productService.deleteProduct(id);
+    }
+
 
 
 }

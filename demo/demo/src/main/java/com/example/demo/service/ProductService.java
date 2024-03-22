@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+//implements ProductInterface
 public class ProductService {
     private final ProductRepository productRepository;
 

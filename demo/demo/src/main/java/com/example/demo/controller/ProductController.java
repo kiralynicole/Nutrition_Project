@@ -4,10 +4,14 @@ import com.example.demo.exception.ProductException;
 import com.example.demo.model.Product;
 import com.example.demo.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+/**
+ * The controller of the Product
+ *
+ */
 
 @RestController
 @RequestMapping("/products")

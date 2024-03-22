@@ -35,6 +35,8 @@ public class Product {
     @Column(nullable = false)
     private LocalDate expirationDate;
 
+
+
    // @Column(nullable = false)
    // private String image;
 

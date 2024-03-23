@@ -1,9 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.exception.ProductException;
-import com.example.demo.model.Product;
+import com.example.demo.exception.InvalidException;
 import com.example.demo.model.User;
-import com.example.demo.repository.ProductRepository;
 import com.example.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,9 +25,9 @@ public class UserService {
     }
 
 
-    public User getUserByName(String name) throws ProductException {
+    public User getUserByName(String name) throws InvalidException {
         return userRepository.getUserByName(name)
-                .orElseThrow(() ->new ProductException("The user with name " + name + " doesn t exist"));
+                .orElseThrow(() ->new InvalidException("The user with name " + name + " doesn t exist"));
     }
 
     public User createUser(User p) {

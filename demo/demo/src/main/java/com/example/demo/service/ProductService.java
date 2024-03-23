@@ -1,13 +1,19 @@
 package com.example.demo.service;
 
-import com.example.demo.exception.ProductException;
+import com.example.demo.controller.ProductController;
+import com.example.demo.exception.InvalidException;
 import com.example.demo.model.Product;
 import com.example.demo.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
+/**
+ * ProductService handles the business logic for product operations.
+ * It interacts with {@link ProductRepository} to perform CRUD operations on products.
+ * This service is used by {@link ProductController} to handle HTTP requests.
+ */
 
 @Service
 @RequiredArgsConstructor
@@ -15,26 +21,57 @@ import java.util.Optional;
 public class ProductService {
     private final ProductRepository productRepository;
 
+    /**
+     * Retrieves a product by its ID.
+     *
+     * @param id The ID of the product to be retrieved.
+     * @return The product with the specified ID.
+     * @throws RuntimeException If no product is found with the given ID.
+     */
     public Product getProductById(int id) {
         return productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found for id: " + id));
     }
 
 
+    /**
+     * Retrieves all products available in the repository.
+     *
+     * @return A list of all products.
+     */
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
 
-    public Product getProductByName(String name) throws ProductException {
+    /**
+     * Retrieves a product by its name.
+     *
+     * @param name The name of the product to be retrieved.
+     * @return The product with the specified name.
+     * @throws InvalidException If no product exists with the given name.
+     */
+    public Product getProductByName(String name) throws InvalidException {
         return productRepository.getProductByName(name)
-                .orElseThrow(() ->new ProductException("The product with name " + name + " doesn t exist"));
+                .orElseThrow(() ->new InvalidException("The product with name " + name + " doesn t exist"));
     }
 
+    /**
+     * Creates a new product.
+     *
+     * @param p The product to be created.
+     * @return The newly created product.
+     */
     public Product createProduct(Product p) {
         return productRepository.save(p);
     }
 
+    /**
+     * Updates an existing product.
+     *
+     * @param p The product with updated information.
+     * @return The updated product.
+     */
     public Product updateProduct(Product p) {
         Product product = productRepository.findById(p.getId())
                 .orElse(null);
@@ -47,6 +84,12 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+    /**
+     * Deletes a product by its ID.
+     *
+     * @param id The ID of the product to be deleted.
+     * @return A string message indicating the result of the deletion operation.
+     */
     public String deleteProduct(int id){
         productRepository.deleteById(id);
         return "Product with id " + id + " removed";

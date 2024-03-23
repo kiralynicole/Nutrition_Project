@@ -8,32 +8,71 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * The {@code UserService} class provides services for managing {@link User} entities.
+ * It includes methods for CRUD operations and user-specific queries, such as retrieving a user by name.
+ * This service relies on {@link UserRepository} for persistence operations.
+ *
+ * @author Your Name or Team
+ */
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
     private UserRepository userRepository;
 
+    /**
+     * Retrieves a {@link User} by its ID.
+     *
+     * @param id the ID of the user to retrieve
+     * @return the found {@link User}
+     * @throws RuntimeException if no user is found with the provided ID
+     */
     public User getUserById(int id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found for id: " + id));
     }
 
-
+    /**
+     * Retrieves all users in the system.
+     *
+     * @return a list of {@link User}
+     */
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-
+    /**
+     * Retrieves a {@link User} by their name.
+     *
+     * @param name the name of the user to retrieve
+     * @return the found {@link User}
+     * @throws InvalidException if no user exists with the specified name
+     */
     public User getUserByName(String name) throws InvalidException {
         return userRepository.getUserByName(name)
                 .orElseThrow(() ->new InvalidException("The user with name " + name + " doesn t exist"));
     }
 
-    public User createUser(User p) {
-        return userRepository.save(p);
+    /**
+     * Creates a new {@link User} in the system.
+     *
+     * @param u the {@link User} to create
+     * @return the created {@link User}
+     */
+    public User createUser(User u) {
+        return userRepository.save(u);
     }
 
+
+    /**
+     * Updates an existing {@link User}.
+     *
+     * Note: This method assumes the user with the given ID already exists.
+     *
+     * @param u the {@link User} to update
+     * @return the updated {@link User}, or null if the user does not exist
+     */
     public User updateUser(User u) {
         User user = userRepository.findById(u.getId())
                 .orElse(null);
@@ -46,6 +85,12 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    /**
+     * Deletes a {@link User} by their ID.
+     *
+     * @param id the ID of the user to delete
+     * @return a confirmation message indicating successful deletion
+     */
     public String deleteUser(int id){
        userRepository.deleteById(id);
         return "User with id " + id + " removed";

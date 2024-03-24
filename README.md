@@ -15,7 +15,7 @@ I want also to add a form where you can sign if you want to be invited at a body
 The backend of the project uses Spring framework to divide the functionalities in special classes with annotations that represent a function that that class will have.
 
 **Model package**
--there will be the tables in the database like Product, User and Order
+- there will be the tables in the database like Product, User and Order
 
 **Repository package**
 - we have the interfaces for the interaction with the database

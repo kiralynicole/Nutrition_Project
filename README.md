@@ -18,17 +18,17 @@ The backend of the project uses Spring framework to divide the functionalities i
 -there will be the tables in the database like Product, User and Order
 
 **Repository package**
--we have the interfaces for the interaction with the database
--these classes extends the JPA  repository which help us with the predefined methods like findById, findAll and if we want other methods we have to add them in this interface 
+- we have the interfaces for the interaction with the database
+- these classes extends the JPA  repository which help us with the predefined methods like findById, findAll and if we want other methods we have to add them in this interface 
 
 **Service package**
--in this package will be the classes which implements the interfaces from repository and this is basically the bussiness logic of the app
--in these classes will be the the implementation of the methods defined in the repository
+- in this package will be the classes which implements the interfaces from repository and this is basically the bussiness logic of the app
+- in these classes will be the the implementation of the methods defined in the repository
 
 **Controller package**
--the controllers are responsible for handling HTTP requests related to products, users or orders like GET, POST, PUT and DELETE
--these use the bussiness logic from the service
--they offer endpoints for various operations
+- the controllers are responsible for handling HTTP requests related to products, users or orders like GET, POST, PUT and DELETE
+- these use the bussiness logic from the service
+- they offer endpoints for various operations
 
 
 

@@ -30,7 +30,7 @@ The backend of the project uses Spring framework to divide the functionalities i
 - these use the bussiness logic from the service
 - they offer endpoints for various operations
 
-![A](D:\PS-lab\Nutrition_Project\dbdiagram.png "Diagram of the database")
+!([D:\PS-lab\Nutrition_Project\dbdiagram.png](https://github.com/kiralynicole/Nutrition_Project/blob/main/dbdiagram.png)https://github.com/kiralynicole/Nutrition_Project/blob/main/dbdiagram.png "Diagram of the database")
 
 
 

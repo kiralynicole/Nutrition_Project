@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.exception.InvalidException;
+import com.example.demo.interfaces.UserInterface;
+import com.example.demo.model.Product;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +19,7 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserService implements UserInterface {
 
     private UserRepository userRepository;
 
@@ -49,9 +51,9 @@ public class UserService {
      * @return the found {@link User}
      * @throws InvalidException if no user exists with the specified name
      */
-    public User getUserByName(String name) throws InvalidException {
-        return userRepository.getUserByName(name)
-                .orElseThrow(() ->new InvalidException("The user with name " + name + " doesn t exist"));
+    public User getUserByName(String name) {
+        return userRepository.findByName(name)
+                .orElseThrow(() -> new RuntimeException("Product not found for name: " + name));
     }
 
     /**

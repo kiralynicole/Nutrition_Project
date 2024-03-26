@@ -20,5 +20,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
      * @param name The name of the product to search for.
      * @return An {@link Optional} containing the found product if it exists, or empty if not found.
      */
-    Optional<Product> getProductByName(String name);
+    Optional<Product> findByName(String name);
+
 }

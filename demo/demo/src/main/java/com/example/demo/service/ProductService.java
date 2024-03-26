@@ -2,12 +2,14 @@ package com.example.demo.service;
 
 import com.example.demo.controller.ProductController;
 import com.example.demo.exception.InvalidException;
+import com.example.demo.interfaces.ProductInterface;
 import com.example.demo.model.Product;
 import com.example.demo.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * ProductService handles the business logic for product operations.
@@ -18,7 +20,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 //implements ProductInterface
-public class ProductService {
+public class ProductService  implements ProductInterface {
     private final ProductRepository productRepository;
 
     /**
@@ -51,9 +53,9 @@ public class ProductService {
      * @return The product with the specified name.
      * @throws InvalidException If no product exists with the given name.
      */
-    public Product getProductByName(String name) throws InvalidException {
-        return productRepository.getProductByName(name)
-                .orElseThrow(() ->new InvalidException("The product with name " + name + " doesn t exist"));
+    public Product getProductByName(String name) {
+        return productRepository.findByName(name)
+                .orElseThrow(() -> new RuntimeException("Product not found for name: " + name));
     }
 
     /**
@@ -94,4 +96,6 @@ public class ProductService {
         productRepository.deleteById(id);
         return "Product with id " + id + " removed";
     }
+
+
 }

@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.exception.InvalidException;
+import com.example.demo.interfaces.ProductInterface;
 import com.example.demo.model.Product;
 import com.example.demo.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductController {
 
-   private final ProductService productService;
+   private final ProductInterface productInterface;
 
     /**
      * Finds a product by its ID.
@@ -30,7 +31,7 @@ public class ProductController {
      */
     @GetMapping("/{id}")
     public Product findProductById(@PathVariable int id){
-        return this.productService.getProductById(id);
+        return this.productInterface.getProductById(id);
     }
 
     /**
@@ -40,7 +41,7 @@ public class ProductController {
      */
     @GetMapping
     public List<Product> findAllProducts(){
-        return productService.getAllProducts();
+        return productInterface.getAllProducts();
     }
 
     /**
@@ -52,7 +53,7 @@ public class ProductController {
      */
     @GetMapping("/findName/{name}")
     public Product findProductByName(@PathVariable String name) throws InvalidException {
-        return productService.getProductByName(name);
+        return productInterface.getProductByName(name);
     }
 
     /**
@@ -63,7 +64,7 @@ public class ProductController {
      */
     @PostMapping("/addProduct")
         public Product addProduct(@RequestBody Product p){
-            return productService.createProduct(p);
+            return productInterface.createProduct(p);
         }
 
     /**
@@ -74,7 +75,7 @@ public class ProductController {
      */
     @PutMapping("/updateProduct")
     public Product updateProduct(@RequestBody Product p){
-        return productService.updateProduct(p);
+        return productInterface.updateProduct(p);
     }
 
     /**
@@ -85,7 +86,7 @@ public class ProductController {
      */
     @DeleteMapping("/deleteProduct/{id}")
     public String deleteProduct(@PathVariable int id){
-        return productService.deleteProduct(id);
+        return productInterface.deleteProduct(id);
     }
 
 

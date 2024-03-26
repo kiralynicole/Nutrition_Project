@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 
 import com.example.demo.exception.InvalidException;
+import com.example.demo.interfaces.UserInterface;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
 
-    private UserService userService;
+    private UserInterface userInterface;
 
     /**
      * Finds a user by their ID.
@@ -31,7 +32,7 @@ public class UserController {
      */
     @GetMapping("/{id}")
     public User findUserById(@PathVariable int id){
-        return this.userService.getUserById(id);
+        return this.userInterface.getUserById(id);
     }
 
 
@@ -42,7 +43,7 @@ public class UserController {
      */
     @GetMapping
     public List<User> findAllUsers(){
-        return userService.getAllUsers();
+        return userInterface.getAllUsers();
     }
 
 
@@ -55,7 +56,7 @@ public class UserController {
      */
     @GetMapping("/findName/{name}")
     public User findUserByName(@PathVariable String name) throws InvalidException {
-        return userService.getUserByName(name);
+        return userInterface.getUserByName(name);
     }
 
     /**
@@ -66,7 +67,7 @@ public class UserController {
      */
     @PostMapping("/addUser")
     public User addUser(@RequestBody User u){
-        return userService.createUser(u);
+        return userInterface.createUser(u);
     }
 
     /**
@@ -77,7 +78,7 @@ public class UserController {
      */
     @PutMapping("/updateUser")
     public User updateUser(@RequestBody User u){
-        return userService.updateUser(u);
+        return userInterface.updateUser(u);
     }
 
     /**
@@ -88,7 +89,7 @@ public class UserController {
      */
     @DeleteMapping("/deleteUser/{id}")
     public String deleteUser(@PathVariable int id){
-        return userService.deleteUser(id);
+        return userInterface.deleteUser(id);
     }
 
 }

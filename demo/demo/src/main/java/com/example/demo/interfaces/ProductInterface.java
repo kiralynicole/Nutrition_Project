@@ -15,7 +15,7 @@ public interface ProductInterface {
      *
      * @return a list of all {@link Product} entities
      */
-    List<Product> findAll();
+    List<Product> getAllProducts();
 
     /**
      * Finds a product by its ID.
@@ -23,21 +23,15 @@ public interface ProductInterface {
      * @param id the ID of the product to find
      * @return the found {@link Product}, or {@code null} if no product is found with the provided ID
      */
-    Product findById(int id);
+    Product getProductById(int id);
 
-    /**
-     * Saves a given product, either creating a new entry or updating an existing one.
-     *
-     * @param p the {@link Product} to save
-     */
-    void save(Product p);
 
     /**
      * Deletes a product by its ID.
      *
      * @param id the ID of the product to delete
      */
-    void deleteById(int id);
+    String deleteProduct(int id);
 
     /**
      * Retrieves a product by its name.
@@ -45,7 +39,7 @@ public interface ProductInterface {
      * @param name the name of the product to find
      * @return an {@link Optional} describing the found {@link Product}, or an empty {@link Optional} if no product is found
      */
-    Optional<Product> getProductByName(String name);
+    Product getProductByName(String name);
 
     /**
      * Creates a new product.

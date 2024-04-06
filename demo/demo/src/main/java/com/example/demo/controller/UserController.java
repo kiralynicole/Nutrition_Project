@@ -22,7 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
 
-    private UserInterface userInterface;
+    private final UserInterface userInterface;
 
     /**
      * Finds a user by their ID.

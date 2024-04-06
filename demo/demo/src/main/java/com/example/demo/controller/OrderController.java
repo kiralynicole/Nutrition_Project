@@ -24,7 +24,7 @@ public class OrderController {
     /**
      * The service that contains order-related business logic.
      */
-    private OrderInterface orderInterface;
+    private final OrderInterface orderInterface;
 
 
     @GetMapping("/{id}")

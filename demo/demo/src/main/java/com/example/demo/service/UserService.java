@@ -21,7 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService implements UserInterface {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     /**
      * Retrieves a {@link User} by its ID.

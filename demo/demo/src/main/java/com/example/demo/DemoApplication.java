@@ -27,7 +27,7 @@ public class DemoApplication {
 		store.getNotificationService().subscribe(
 				new EmailMsgListener("clau.popa@gmail.com"));
 
-		store.getNotificationService().notifing();
+		store.newSale();
 
 		System.out.println(store.getNotificationService().getCustomers());
 

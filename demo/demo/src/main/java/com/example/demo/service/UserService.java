@@ -2,7 +2,9 @@ package com.example.demo.service;
 
 import com.example.demo.exception.InvalidException;
 import com.example.demo.interfaces.UserInterface;
+import com.example.demo.listeners.EmailMsgListener;
 import com.example.demo.model.Product;
+import com.example.demo.model.Store;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,7 @@ import java.util.List;
 public class UserService implements UserInterface {
 
     private final UserRepository userRepository;
+    private Store store = new Store();
 
     /**
      * Retrieves a {@link User} by its ID.
@@ -96,6 +99,46 @@ public class UserService implements UserInterface {
     public String deleteUser(int id){
        userRepository.deleteById(id);
         return "User with id " + id + " removed";
+    }
+
+    public void addSale(int id){
+        User admin = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found for id: " + id));
+
+        if(admin.isAdmin()){
+            admin.setSale(true);
+            userRepository.save(admin);
+            List<User> users = getAllUsers();
+
+            for(User u: users){
+                u.setSale(true);
+                userRepository.save(u);
+                store.getNotificationService().subscribe(new EmailMsgListener(u.getEmail()));
+            }
+            store.newSale();
+        }
+
+
+    }
+
+    public void removeSale(int id){
+        User admin = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found for id: " + id));
+
+        if(admin.isAdmin()){
+            admin.setSale(false);
+            userRepository.save(admin);
+            List<User> users = getAllUsers();
+
+            for(User u: users){
+                u.setSale(false);
+                userRepository.save(u);
+                store.getNotificationService().subscribe(new EmailMsgListener(u.getEmail()));
+            }
+            store.newSale();
+        }
+
+
     }
 
     

@@ -62,5 +62,14 @@ public class User {
     @Column(nullable=false)
     private String phone;
 
+    @Column(nullable = false)
+    private boolean isAdmin;
+
+    public void setSale(boolean sale) {
+        isSale = sale;
+    }
+
+    @Column(nullable = false)
+    private boolean isSale;
 
 }

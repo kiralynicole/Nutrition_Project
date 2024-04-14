@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DemoApplication {
 
 	public static void main(String[] args) {
-		//System.out.println("Hellow from main");
+		//System.out.println("Hello from main");
 	//SpringApplication.run(DemoApplication.class, args);
 
 		/*
@@ -20,16 +20,10 @@ public class DemoApplication {
 		System.out.println(password.getPassword());
 		 */
 
+		//store.newSale();
 
-		Store store = new Store();
-		store.getNotificationService().subscribe(
-				new EmailMsgListener("ana.pop@gmail.com"));
-		store.getNotificationService().subscribe(
-				new EmailMsgListener("clau.popa@gmail.com"));
-
-		store.newSale();
-
-		System.out.println(store.getNotificationService().getCustomers());
+		//System.out.println(store.getNotificationService().getCustomers());
+		SpringApplication.run(DemoApplication.class, args);
 
 
 

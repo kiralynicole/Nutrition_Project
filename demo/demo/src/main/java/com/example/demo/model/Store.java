@@ -1,13 +1,27 @@
 package com.example.demo.model;
 
 import com.example.demo.service.NotificationService;
+import lombok.Data;
+import lombok.Getter;
 
 /**
  * The {@code Store} class represents a store that contains a {@link NotificationService} to manage
  * notifications for subscribed customers. It is responsible for notifying customers about new sales
  * or promotions via the {@code NotificationService}.
  */
+
+@Data
 public class Store {
+    /**
+     * -- GETTER --
+     *  Retrieves the
+     *  associated with this
+     * .
+     *  This service is responsible for managing customer subscriptions and notifications.
+     *
+     * @return The {@link NotificationService} used by this store to manage notifications.
+     */
+    @Getter
     private final NotificationService notificationService;
 
     /**
@@ -28,13 +42,4 @@ public class Store {
         notificationService.notifing();
     }
 
-    /**
-     * Retrieves the {@link NotificationService} associated with this {@code Store}.
-     * This service is responsible for managing customer subscriptions and notifications.
-     *
-     * @return The {@link NotificationService} used by this store to manage notifications.
-     */
-    public NotificationService getNotificationService() {
-        return notificationService;
-    }
 }

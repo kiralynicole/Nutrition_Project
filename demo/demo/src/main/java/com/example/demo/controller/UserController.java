@@ -92,4 +92,16 @@ public class UserController {
         return userInterface.deleteUser(id);
     }
 
+    @PostMapping("/addSale/{id}")
+    public void addSale(@PathVariable int id){
+        userInterface.addSale(id);
+    }
+
+    @PostMapping("/removeSale/{id}")
+    public void removeSale(@PathVariable int id){
+        userInterface.removeSale(id);
+    }
+
+
+
 }

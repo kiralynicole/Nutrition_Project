@@ -58,4 +58,7 @@ public interface UserInterface {
      */
     User updateUser(User u);
 
+    void addSale(int id);
+
+    void removeSale(int id);
 }

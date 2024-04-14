@@ -25,7 +25,7 @@ public class EmailMsgListener implements EventListener {
      */
     public void update() {
         // Actually send the email
-        System.out.println("Sent email to: " + email);
+        System.out.println("Update sale!!");
     }
 
     /**

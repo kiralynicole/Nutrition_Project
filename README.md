@@ -41,7 +41,8 @@ The alchemy of logic. This is where raw data transforms into meaningful actions.
 ### Controller Package
 The conductors of interaction. Through the Controller package, we navigate the flow of information, creating endpoints that serve as gateways to the myriad functionalities our platform offers. Whether it’s managing your shopping cart or signing up for a body composition analysis, our controllers ensure a seamless, intuitive experience.
 
-![](https://github.com/kiralynicole/Nutrition_Project/blob/main/dbdiagram.png?raw=true "Diagram of the database")
+
+
 
 ## Features
 
@@ -50,13 +51,110 @@ The conductors of interaction. Through the Controller package, we navigate the f
 - **User Registration and Login:** Securely manage your profile and shopping cart with ease.
 - **Body Composition Analysis Sign-Up:** Elevate your fitness journey with a personal invitation to understand your body’s needs on a deeper level.
 
+# Backend System Overview
+
+Welcome to the backend system documentation of our Nutrition Platform: A Wellness Odyssey. Here, we outline the functionality provided by our RESTful services, essential for managing user interactions across our comprehensive suite of health and fitness products. Our backend is crafted to ensure a seamless user experience from registration and product discovery to order management.
+
+## Controllers Overview
+
+Our platform leverages three primary controllers to handle operations related to users, products, and orders. Each controller facilitates easy and efficient database interactions, ensuring data integrity and swift response times.
+
+### UserController
+
+Responsible for managing all user-related data interactions, providing comprehensive endpoints for user profile management, registration, and administrative actions.
+
+#### Endpoints:
+
+- **GET /users/{id}**: Retrieve a specific user by their unique identifier.
+- **GET /users**: Fetch a list of all registered users.
+- **GET /users/findName/{name}**: Search for users by their names.
+- **POST /users/addUser**: Register a new user to the platform.
+- **PUT /users/updateUser**: Update existing user information.
+- **DELETE /users/deleteUser/{id}**: Delete a user from the platform.
+- **POST /users/addSale/{id}**: Activate discount sales for all users, controlled by an administrator.
+- **POST /users/removeSale/{id}**: Deactivate discount sales.
+
+### ProductController
+
+Handles all aspects of product management from the introduction of new products to updating and removing existing ones.
+
+#### Endpoints:
+
+- **GET /products/{id}**: Get details of a product by its ID.
+- **GET /products**: List all available products.
+- **GET /products/findName/{name}**: Locate products by name.
+- **POST /products/addProduct**: Introduce a new product to the market.
+- **PUT /products/updateProduct**: Modify details of an existing product.
+- **DELETE /products/deleteProduct/{id}**: Remove a product from the listing.
+
+### OrderController
+
+Oversees all operations related to orders, from placement to modification and cancellation, ensuring efficient and accurate order processing.
+
+#### Endpoints:
+
+- **GET /orders/{id}**: Retrieve an order by its ID.
+- **GET /orders**: Obtain a comprehensive list of all orders.
+- **GET /orders/findClient/{id}**: Find which user placed a particular order.
+- **POST /orders/addOrder**: Place a new order.
+- **PUT /orders/updateOrder**: Update an existing order.
+- **DELETE /orders/deleteOrder/{id}**: Cancel and delete an order.
+
+## Integration and Utility
+
+These controllers are integral to the functionality of our Nutrition Platform, ensuring that users can manage their profiles, browse and order products, and access services like promotional discounts effectively. The backend is optimized for performance, with robust data handling and security measures in place to protect user information and ensure the integrity of transaction data.
+
+# Observer Pattern Implementation
+
+Our platform employs the Observer Pattern to efficiently manage notifications regarding sales promotions. This design pattern is pivotal for ensuring that our communication mechanisms are modular, maintainable, and loosely coupled.
+
+## Architectural Overview
+
+### Store Class
+
+The `Store` class serves as the central hub for our sales promotions, integrating with the `NotificationService` to manage notifications. It acts as the subject in the Observer Pattern, responsible for notifying all observers about the occurrence of events such as new sales or discounts.
+
+### NotificationService
+
+This service is the linchpin for managing subscriber interactions and disseminating information. It maintains a list of observers and notifies them of any sales events they should be aware of. This component ensures that all registered observers are kept in the loop about relevant store updates.
+
+### EmailMsgListener
+
+Observers in our system implement the `EmailMsgListener` interface, which includes the essential methods for receiving updates. When notified, these listeners react by performing predefined actions, such as sending out an email to a user about a sale.
+
+## Workflow Description
+
+1. **Subscription**: Users subscribe to notifications through the `NotificationService` by registering as observers. This process involves adding their `EmailMsgListener` instances to the service's observer list.
+
+2. **Notification Dispatch**: Whenever the `Store` initiates a new sale, it instructs the `NotificationService` to alert all subscribed observers. This is done by invoking the `notifying` method, which in turn calls the `update` method on each observer.
+
+3. **Receiving Notifications**: Each observer processes the notification independently. For example, an `EmailMsgListener` might send an email to the user's registered email address informing them of the new sale.
+
+## Special Endpoints for Sales Management
+
+### addSale Endpoint
+
+- **Endpoint**: `POST /users/addSale/{id}`
+- **Description**: This endpoint allows an administrator to activate a sale or promotion across the platform. When this endpoint is triggered, the `Store` class leverages the `NotificationService` to notify all subscribed observers about the sale, effectively using the Observer Pattern to disseminate information swiftly.
+- **Usage**: Typically used at the start of a new promotional period or when introducing new products at a discount. This endpoint ensures that all active subscribers are immediately informed about the promotion, enhancing engagement and driving sales.
+
+### removeSale Endpoint
+
+- **Endpoint**: `POST /users/removeSale/{id}`
+- **Description**: Opposite to the `addSale` endpoint, this allows an administrator to end a sale or promotion. It follows the same Observer Pattern to notify subscribers that a particular sale has ended, ensuring clear and consistent communication is maintained.
+- **Usage**: Important for concluding promotional periods accurately and promptly. This action prevents any confusion about the status of sales and maintains the integrity of pricing and promotions across the platform.
+
+## Advantages of the Observer Pattern
+
+- **Decoupling of Subject and Observers**: Our system's `Store` doesn't need detailed knowledge about the observers. It interacts with them through a well-defined interface, facilitating easy maintenance and scalability.
+
+- **Enhanced Scalability**: New types of notifications and observers can be added without significant changes to existing code, thanks to the modular nature of the pattern.
+
+- **Immediate Updates**: This pattern allows for real-time updates, which is critical for ensuring that all users receive timely notifications about sales, enhancing their engagement and satisfaction
+
+
 ## Join Our Wellness Odyssey
 
 This platform is more than a collection of features; it’s a commitment to your health and wellness journey. With every product selection, every sign-up for a body composition analysis, you’re not just making a choice; you’re taking a step towards the best version of yourself.
 
 Welcome to our nutrition platform - where your wellness odyssey awaits.
-
-
-
-
-

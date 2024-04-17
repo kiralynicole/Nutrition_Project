@@ -3,6 +3,7 @@ package com.example.demo.controller;
 
 import com.example.demo.interfaces.OrderInterface;
 import com.example.demo.model.Order;
+import com.example.demo.model.Product;
 import com.example.demo.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +43,12 @@ public class OrderController {
 
     @PostMapping("/addOrder")
     public Order addOrder(@RequestBody Order o){return orderInterface.createOrder(o);}
+
+    @PutMapping("/updateOrder")
+    public Order updateOrder(@RequestBody Order o){
+        return orderInterface.updateOrder(o);
+    }
+
 
 
 }

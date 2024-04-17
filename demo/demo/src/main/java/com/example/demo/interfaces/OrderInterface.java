@@ -7,6 +7,8 @@
 package com.example.demo.interfaces;
 
 import com.example.demo.model.Order;
+import com.example.demo.model.Product;
+
 import java.util.List;
 
 public interface OrderInterface {
@@ -49,4 +51,6 @@ public interface OrderInterface {
      * @return The newly created {@link Order} object.
      */
     Order createOrder(Order o);
+
+    Order updateOrder(Order o);
 }

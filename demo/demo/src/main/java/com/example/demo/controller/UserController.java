@@ -92,16 +92,25 @@ public class UserController {
         return userInterface.deleteUser(id);
     }
 
+    /**
+     * Endpoint to activate sale mode for all users, initiated by an administrator.
+     *
+     * @param id The ID of the administrator initiating the sale mode.
+     * @throws RuntimeException If the initiating user is not an administrator or does not exist.
+     */
     @PostMapping("/addSale/{id}")
     public void addSale(@PathVariable int id){
         userInterface.addSale(id);
     }
 
+    /**
+     * Endpoint to deactivate sale mode for all users, initiated by an administrator.
+     *
+     * @param id The ID of the administrator ending the sale mode.
+     * @throws RuntimeException If the initiating user is not an administrator or does not exist.
+     */
     @PostMapping("/removeSale/{id}")
     public void removeSale(@PathVariable int id){
         userInterface.removeSale(id);
     }
-
-
-
 }

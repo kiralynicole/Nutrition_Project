@@ -60,5 +60,21 @@ public class Order {
     @Column(nullable = false)
     private int quantity;
 
+    /**
+     * Constructs an Order with the specified user ID, product ID, order date, and quantity.
+     * This constructor allows for direct creation of an order object with all fields initialized.
+     *
+     * @param idUser    the ID of the user who placed the order
+     * @param idProduct the ID of the product ordered
+     * @param localDate  the date on which the order was placed
+     * @param quantity  the quantity of the product ordered
+     */
+    public Order(int idUser, int idProduct, LocalDate localDate, int quantity){
+        this.idUser = idUser;
+        this.idProduct = idProduct;
+        this.date= localDate;
+        this.quantity = quantity;
+    }
+
 
 }

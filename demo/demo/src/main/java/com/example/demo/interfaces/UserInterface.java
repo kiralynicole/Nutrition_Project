@@ -58,7 +58,19 @@ public interface UserInterface {
      */
     User updateUser(User u);
 
+    /**
+     * Activates sale mode for all users if initiated by an administrator.
+     *
+     * @param id The ID of the administrator initiating the sale mode.
+     * @throws RuntimeException If the user is not found, is not an administrator, or if the operation fails.
+     */
     void addSale(int id);
 
+    /**
+     * Deactivates sale mode for all users if initiated by an administrator.
+     *
+     * @param id The ID of the administrator ending the sale mode.
+     * @throws RuntimeException If the user is not found, is not an administrator, or if the operation fails.
+     */
     void removeSale(int id);
 }

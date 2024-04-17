@@ -56,6 +56,16 @@ public class Product {
     @Column(nullable = false)
     private LocalDate expirationDate;
 
+    public Product(String name, Category category, int price, int stock, LocalDate expirationDate){
+        this.name = name;
+        this.category = category;
+        this.price = price;
+        this.stock = stock;
+        this.expirationDate = expirationDate;
+
+
+    }
+
 
 
    // @Column(nullable = false)

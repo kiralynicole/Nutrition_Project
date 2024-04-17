@@ -8,6 +8,7 @@ import com.example.demo.model.Store;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,11 +21,27 @@ import java.util.List;
  * @author Your Name or Team
  */
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class UserService implements UserInterface {
 
+    //private UserData userData;
+
+    @Autowired
     private final UserRepository userRepository;
     private Store store = new Store();
+
+
+    /**
+     * Constructs a UserService with the necessary {@link UserRepository}.
+     *
+     * @param userRepository the repository used for user persistence operations
+     */
+    public UserService(UserRepository userRepository){
+        this.userRepository = userRepository;
+
+    }
+
+
 
     /**
      * Retrieves a {@link User} by its ID.
@@ -35,7 +52,7 @@ public class UserService implements UserInterface {
      */
     public User getUserById(int id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found for id: " + id));
+                .orElseThrow(() -> new RuntimeException("User not found for id: " + id));
     }
 
     /**
@@ -101,6 +118,12 @@ public class UserService implements UserInterface {
         return "User with id " + id + " removed";
     }
 
+    /**
+     * Enables a sale mode for all users if the requesting user is an administrator.
+     *
+     * @param id the ID of the administrator requesting the sale mode activation
+     * @throws RuntimeException if the user does not exist or is not an administrator
+     */
     public void addSale(int id){
         User admin = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found for id: " + id));
@@ -121,6 +144,12 @@ public class UserService implements UserInterface {
 
     }
 
+    /**
+     * Disables the sale mode for all users if the requesting user is an administrator.
+     *
+     * @param id the ID of the administrator requesting to end the sale mode
+     * @throws RuntimeException if the user does not exist or is not an administrator
+     */
     public void removeSale(int id){
         User admin = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found for id: " + id));

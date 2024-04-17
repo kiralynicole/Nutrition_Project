@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.interfaces.OrderInterface;
 import com.example.demo.model.Order;
+import com.example.demo.model.Product;
 import com.example.demo.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -74,6 +75,19 @@ public class OrderService implements OrderInterface {
     @Override
     public Order createOrder(Order o) {
         return orderRepository.save(o);
+    }
+
+    @Override
+    public Order updateOrder(Order o) {
+        Order order = orderRepository.findById(o.getId())
+                .orElse(null);
+
+        order.setIdProduct(o.getIdProduct());
+        order.setDate(o.getDate());
+        order.setQuantity(o.getQuantity());
+        order.setIdUser(o.getIdUser());
+
+        return orderRepository.save(order);
     }
 
 }

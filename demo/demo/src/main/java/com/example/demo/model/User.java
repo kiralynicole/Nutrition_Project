@@ -62,14 +62,40 @@ public class User {
     @Column(nullable=false)
     private String phone;
 
+    /**
+     * Indicates whether the user has administrative privileges. This field cannot be null.
+     */
     @Column(nullable = false)
     private boolean isAdmin;
 
-    public void setSale(boolean sale) {
-        isSale = sale;
-    }
-
+    /**
+     * Indicates whether the user is associated with sales. This field cannot be null and helps in
+     * segregating user roles within the system.
+     */
     @Column(nullable = false)
     private boolean isSale;
+
+    /**
+     * Constructor to initialize a User with full attributes without using Lombok's AllArgsConstructor.
+     * This constructor manually assigns each field.
+     *
+     * @param name     the user's name
+     * @param address  the user's address
+     * @param email    the user's email address
+     * @param pass the user's password
+     * @param phone    the user's phone number
+     * @param isAdmin  indicates if the user has administrative privileges
+     * @param isSale   indicates if the user is involved in sales
+     */
+    public User(String name, String address, String email, String pass, String phone, boolean isAdmin, boolean isSale){
+        this.name = name;
+        this.address = address;
+        this.email = email;
+        this.phone = phone;
+        this.isSale = isSale;
+        this.isAdmin = isAdmin;
+        this.password = pass;
+
+    }
 
 }

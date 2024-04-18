@@ -1,12 +1,16 @@
 package com.example.demo.user;
 
 import com.example.demo.interfaces.UserInterface;
+import com.example.demo.listeners.EmailMsgListener;
+import com.example.demo.model.Store;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.service.NotificationService;
 import com.example.demo.service.UserService;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 
 import org.mockito.MockitoAnnotations;
@@ -14,8 +18,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.mockito.ArgumentMatchers.any;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.*;
 
 /**
  * Tests for the {@link UserService} class.
@@ -29,14 +36,20 @@ public class UserTest {
     //obiectul pe care il testam
     private UserInterface userInterface;
 
+    @Mock
+    private NotificationService notificationService;
+
+    @Mock
+    private Store store;
+
     /**
      * Sets up the testing environment before each test, initializes mocks and the user service interface.
      */
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        userInterface = new UserService(userRepository);
-
+        when(store.getNotificationService()).thenReturn(notificationService); // Ensure this is correctly mocked
+        userInterface = new UserService(userRepository, store);
     }
 
     /**
@@ -132,4 +145,56 @@ public class UserTest {
 
         verify(userRepository).findAll();
     }
+
+    /**
+     * Tests addSale method when an admin user attempts to initiate a sale.
+     */
+    @Test
+    public void testAddSale_AdminInitiates() {
+        User admin = new User(1, "Admin", "Observatorului nr. 10", "admin@example.com", "admin123", "0723678976", true, false);
+        User user1= new User(2, "user1", "Observatorului nr. 1", "admin@example.com", "admin123", "0723678976", false, false);
+        User user2 = new User(3, "user2", "Observatorului nr. 20", "admin@example.com", "admin123", "0723678976", false, false);
+    List<User> users = Arrays.asList(admin, user1, user2);
+
+        when(userRepository.findById(1)).thenReturn(Optional.of(admin));
+        when(userRepository.findAll()).thenReturn(users);
+        when(userRepository.save(admin)).thenReturn(admin);
+
+        for(User user:users){
+            when(userRepository.save(user)).thenReturn(user);
+        }
+
+        userInterface.addSale(1);
+
+        verify(notificationService, times(users.size())).subscribe(any(EmailMsgListener.class));
+
+        for(User user:users){
+            assertTrue(user.isSale());
+        }
+    }
+
+    /**
+     * Tests addSale method failure when a non-admin user attempts to initiate a sale.
+     */
+
+    @Test
+    public void testAddSale_NonAdminInitiates() {
+        User admin = new User(1, "Admin", "Observatorului nr. 10", "admin@example.com", "admin123", "0723678976", true, false);
+        User user1= new User(2, "user1", "Observatorului nr. 1", "admin@example.com", "admin123", "0723678976", false, false);
+        User user2 = new User(3, "user2", "Observatorului nr. 20", "admin@example.com", "admin123", "0723678976", false, false);
+        List<User> users = Arrays.asList(admin, user1, user2);
+
+        when(userRepository.findById(user1.getId())).thenReturn(Optional.of(user1));
+        when(userRepository.findAll()).thenReturn(users);
+
+        userInterface.addSale(user1.getId());
+
+        for(User user:users){
+            assertFalse(user.isSale(), "Non admin initiates the sale");
+        }
+
+        verify(notificationService, never()).subscribe(any(EmailMsgListener.class));
+
+    }
+
 }

@@ -28,7 +28,7 @@ public class UserService implements UserInterface {
 
     @Autowired
     private final UserRepository userRepository;
-    private Store store = new Store();
+    private Store store;
 
 
     /**
@@ -38,6 +38,12 @@ public class UserService implements UserInterface {
      */
     public UserService(UserRepository userRepository){
         this.userRepository = userRepository;
+
+    }
+
+    public UserService(UserRepository userRepository,Store store){
+        this.userRepository = userRepository;
+        this.store = store;
 
     }
 

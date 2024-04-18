@@ -41,6 +41,9 @@ The alchemy of logic. This is where raw data transforms into meaningful actions.
 ### Controller Package
 The conductors of interaction. Through the Controller package, we navigate the flow of information, creating endpoints that serve as gateways to the myriad functionalities our platform offers. Whether it’s managing your shopping cart or signing up for a body composition analysis, our controllers ensure a seamless, intuitive experience.
 
+
+## Diagram of the database
+
 ![](https://github.com/kiralynicole/Nutrition_Project/blob/main/dbdiagram.png?raw=true "Diagram of the database")
 
 

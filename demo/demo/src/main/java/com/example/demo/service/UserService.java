@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.data.UserData;
 import com.example.demo.exception.InvalidException;
 import com.example.demo.interfaces.UserInterface;
 import com.example.demo.listeners.EmailMsgListener;
@@ -24,11 +25,11 @@ import java.util.List;
 //@RequiredArgsConstructor
 public class UserService implements UserInterface {
 
-    //private UserData userData;
+   // private UserData userData;
 
-    @Autowired
+    //@Autowired
     private final UserRepository userRepository;
-    private Store store;
+    private Store store = new Store();
 
 
     /**
@@ -36,6 +37,7 @@ public class UserService implements UserInterface {
      *
      * @param userRepository the repository used for user persistence operations
      */
+    @Autowired
     public UserService(UserRepository userRepository){
         this.userRepository = userRepository;
 

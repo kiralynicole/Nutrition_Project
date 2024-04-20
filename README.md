@@ -46,7 +46,6 @@ The conductors of interaction. Through the Controller package, we navigate the f
 
 ![](https://github.com/kiralynicole/Nutrition_Project/blob/main/dbdiagram.png?raw=true "Diagram of the database")
 
-
 ## Features
 
 - **Diverse Product Categories:** From workout attire to creatine, vitamins, and beyond, explore products that resonate with your fitness ethos.
@@ -154,6 +153,46 @@ Observers in our system implement the `EmailMsgListener` interface, which includ
 - **Enhanced Scalability**: New types of notifications and observers can be added without significant changes to existing code, thanks to the modular nature of the pattern.
 
 - **Immediate Updates**: This pattern allows for real-time updates, which is critical for ensuring that all users receive timely notifications about sales, enhancing their engagement and satisfaction
+
+# Tested Application
+
+### User Service
+
+The `UserService` class provides functionalities for managing users within the system. It includes methods for creating, updating, and deleting users, as well as retrieving user information. Additionally, it features a method for administering sales promotions across the platform.
+
+#### Implementation Details
+
+The `UserService` class is implemented in the `UserService.java` file within the `service` package. It utilizes the `UserRepository` for database interactions and the `NotificationService` for handling notifications.
+
+### Product Service
+
+The `ProductService` class handles the management of products available on the platform. It allows for the creation, updating, and deletion of products, as well as retrieving product information by ID or name.
+
+#### Implementation Details
+
+The `ProductService` class is implemented in the `ProductService.java` file within the `service` package. It interacts with the `ProductRepository` for database operations.
+
+### Order Service
+
+The `OrderService` class is responsible for managing orders placed by users. It provides functionalities for creating, updating, and deleting orders, as well as retrieving order details. Additionally, it allows for fetching the user associated with a specific order.
+
+#### Implementation Details
+
+The `OrderService` class is implemented in the `OrderService.java` file within the `service` package. It interacts with the `OrderRepository` for database operations.
+
+## Running the Tests
+
+To run the tests for the tested application, follow these steps:
+
+1. Ensure that you have all the necessary dependencies and configurations set up for your testing environment.
+2. Navigate to the directory containing the test files.
+3. Run the test suite using your preferred testing framework or tool.
+
+### Test Environment
+
+- **Framework:** JUnit 5
+- **Dependencies:** Mockito, Spring Boot Test
+- **Execution:** Command line or IDE integration
 
 
 ## Join Our Wellness Odyssey

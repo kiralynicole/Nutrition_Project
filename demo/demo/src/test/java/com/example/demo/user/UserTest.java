@@ -196,5 +196,48 @@ public class UserTest {
         verify(notificationService, never()).subscribe(any(EmailMsgListener.class));
 
     }
+    /**
+     * Tests removeSale method when an admin user attempts to end a sale.
+     */
+    @Test
+    public void testRemoveSale_AdminInitiates() {
+        User admin = new User(1, "Admin", "Observatorului nr. 10", "admin@example.com", "admin123", "0723678976", true, true);
+        User user1 = new User(2, "User1", "Observatorului nr. 1", "user1@example.com", "user1123", "0723678000", false, true);
+        User user2 = new User(3, "User2", "Observatorului nr. 20", "user2@example.com", "user2123", "0723678011", false, true);
+        List<User> users = Arrays.asList(admin, user1, user2);
+
+        when(userRepository.findById(1)).thenReturn(Optional.of(admin));
+        when(userRepository.findAll()).thenReturn(users);
+
+        userInterface.removeSale(1);
+
+        verify(notificationService, times(users.size())).subscribe(any(EmailMsgListener.class)); // Admin should not unsubscribe himself
+
+        for(User user : users) {
+            assertFalse(user.isSale(), "Sale should be removed for all users");
+        }
+    }
+
+    /**
+     * Tests removeSale method failure when a non-admin user attempts to end a sale.
+     */
+    @Test
+    public void testRemoveSale_NonAdminInitiates() {
+        User admin = new User(1, "Admin", "Observatorului nr. 10", "admin@example.com", "admin123", "0723678976", true, true);
+        User user1 = new User(2, "User1", "Observatorului nr. 1", "user1@example.com", "user1123", "0723678000", false, true);
+        User user2 = new User(3, "User2", "Observatorului nr. 20", "user2@example.com", "user2123", "0723678011", false, true);
+        List<User> users = Arrays.asList(admin, user1, user2);
+
+        when(userRepository.findById(user1.getId())).thenReturn(Optional.of(user1));
+        when(userRepository.findAll()).thenReturn(users);
+
+        userInterface.removeSale(user1.getId());
+
+        for(User user : users) {
+            assertTrue(user.isSale(), "Sale should not be removed as the initiator is not admin");
+        }
+
+        verify(notificationService, never()).unsubscribe(any(EmailMsgListener.class));
+    }
 
 }

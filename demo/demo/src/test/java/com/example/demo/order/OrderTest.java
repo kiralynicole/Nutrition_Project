@@ -126,8 +126,5 @@ public class OrderTest {
         orderInterface.getUserOfOrder(order1.getId());
 
         verify(orderRepository).findById(order1.getId());
-
-
-
     }
 }

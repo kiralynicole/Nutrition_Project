@@ -41,10 +41,10 @@ The alchemy of logic. This is where raw data transforms into meaningful actions.
 ### Controller Package
 The conductors of interaction. Through the Controller package, we navigate the flow of information, creating endpoints that serve as gateways to the myriad functionalities our platform offers. Whether it’s managing your shopping cart or signing up for a body composition analysis, our controllers ensure a seamless, intuitive experience.
 
-
 ## Diagram of the database
 
 ![](https://github.com/kiralynicole/Nutrition_Project/blob/main/dbdiagram.png?raw=true "Diagram of the database")
+
 
 ## Features
 
@@ -179,6 +179,14 @@ The `OrderService` class is responsible for managing orders placed by users. It 
 #### Implementation Details
 
 The `OrderService` class is implemented in the `OrderService.java` file within the `service` package. It interacts with the `OrderRepository` for database operations.
+
+### Notification Service
+
+The `NotificationService` class is responsible for managing the registration and notification of `EmailMsgListener` instances. It allows for subscribing and unsubscribing listeners to email messages and notifying all registered listeners when an event occurs that they should be informed about.
+
+#### Implementation Details
+
+The `NotificationService` class is implemented in the `NotificationService.java` file within the `service` package. It interacts with the `EmailMsgListener` for the operations.
 
 ## Running the Tests
 

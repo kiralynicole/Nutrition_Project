@@ -43,13 +43,17 @@ public class UserService implements UserInterface {
 
     }
 
+    /**
+     * Constructs a UserService with the necessary {@link UserRepository}.
+     *
+     * @param userRepository the repository used for user persistence operations
+     * @param store the store to help with the sales
+     */
     public UserService(UserRepository userRepository,Store store){
         this.userRepository = userRepository;
         this.store = store;
 
     }
-
-
 
     /**
      * Retrieves a {@link User} by its ID.

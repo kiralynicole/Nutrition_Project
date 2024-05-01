@@ -1,0 +1,46 @@
+.mainNav {
+    box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.3);
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    background-color: #f0f0f0;
+  
+    & menu {
+      display: flex;
+  
+      margin: 0;
+      padding: 0;
+  
+      list-style: none;
+    }
+  
+    & a {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+  
+      color: var(--primary-dark);
+      text-decoration: none;
+  
+      &.active,
+      &:hover {
+        color: var(--primary);
+      }
+    }
+  
+    & .shiftRight {
+      margin-left: auto;
+    }
+
+
+    .searchInput {
+      border: 2px solid #ddd;
+      border-radius: 4px;
+      padding: 5px 10px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      height: 30px;
+    }
+    
+  }

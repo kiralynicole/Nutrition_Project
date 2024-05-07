@@ -49,7 +49,7 @@ import { ProductDetails } from './features/details/ProductDetails';
 function App() {
   return (
     <AuthContextProvider>
-      <BrowserRouter>
+     
         <Nav />
         <Routes>
           <Route path="/" element={<h1>Homepage</h1>} />
@@ -65,7 +65,7 @@ function App() {
           <Route path = "/product/:id" element= {<ProductDetails/>}></Route>
         </Routes>
         <ToastContainer />
-      </BrowserRouter>
+     
     </AuthContextProvider>
   );
 }

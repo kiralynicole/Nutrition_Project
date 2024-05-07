@@ -5,7 +5,6 @@ import './Protein.css';
 
 export const Proteins = () => {
     const [products, setProducts] = useState([]);
-    const [cartStatus, setCartStatus] = useState({});
 
     useEffect(() => {
         fetch('http://localhost:8080/products')  
@@ -14,12 +13,6 @@ export const Proteins = () => {
                 console.log("Fetched products:", allProducts);
                 const proteinProducts = allProducts.filter(product => product.category == 'PROTEINMEALS');
                 setProducts(proteinProducts);
-
-                let initialCartStatus = {};
-                proteinProducts.forEach(product=>{
-                    initialCartStatus[product.id] = false;
-                });
-                setCartStatus(initialCartStatus);
             })
             .catch(error => {
                 console.error('Error fetching products:', error);
@@ -33,13 +26,6 @@ export const Proteins = () => {
         };
     }, [products]);
 
-    function handleAddToCart(e, productId){
-        e.stopPropagation();
-        setCartStatus(prev=>({
-            ...prev,
-            [productId]: !prev[productId]
-        }));
-    }
 
     return (
         <div className="product-container">
@@ -49,7 +35,7 @@ export const Proteins = () => {
                     <div className="product-info">
                         <h3>{product.name}</h3>
                         <p>${product.price}</p>
-                        <button onClick={(e)=>handleAddToCart(e, product.id)}>{cartStatus[product.id] ? "Add to Cart" : "Added to Cart"}</button>
+                        <button>Buy now</button>
                     </div>
                 </Link>
             ))}

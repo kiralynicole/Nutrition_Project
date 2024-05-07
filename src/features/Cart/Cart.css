@@ -1,0 +1,31 @@
+/* Cart.css */
+
+.cart-item {
+    display: flex;
+    align-items: center; 
+    gap: 20px; 
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.cart-item-image {
+    flex-basis: 40%; 
+    width: 600px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.cart-item-details {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.cart-item-details > h2, .cart-item-details > p {
+    margin: 4px 0; 
+}
+
+.total-price{
+    font-weight: bold;
+    color: red;
+}

@@ -5,17 +5,19 @@ const CartContext = createContext();
 
 const cartReducer = (state, action)=>{
     switch(action.type){
-        case 'INCREASE_QUANTITY':
-            return state.map(item=>
-                item.id === action.payload.id ? {...item, quantity: item.quantity + 1} : item
-            );
-        case 'DECREASE_QUANTITY':
-            return state.map(item=>
-                item.id === action.payload.id ? {...item, quantity: Math.max(1, item.quantity - 1)} : item
-            );    
+       
         case 'ADD_ITEM':
             console.log("added item");
-            return [...state, action.payload];
+            const existingItemIndex = state.findIndex(item=> item.id === action.payload.id);
+            if(existingItemIndex !== -1){
+                const newState = [...state];
+                newState[existingItemIndex] = {
+                    ...newState[existingItemIndex],
+                    quantity: newState[existingItemIndex].quantity + action.payload.quantity
+                }
+                return newState;
+            }
+            return [...state, action.payload]; 
         case 'REMOVE_ITEM':
             console.log("removed item");
             return state.filter(item => item.id !==action.payload.id);

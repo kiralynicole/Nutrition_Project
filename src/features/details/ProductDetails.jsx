@@ -10,8 +10,9 @@ export function ProductDetails() {
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [count, dispatch] = useReducer(counterReducer, initialCount);
+   // const [count, dispatch] = useReducer(counterReducer, initialCount);
     const{dispatch: cartDispatch, cart} = useCart();
+    const [productQuantity, setProductQuantity] = useState(1);
 
 
     useEffect(() => {
@@ -32,14 +33,30 @@ export function ProductDetails() {
         fetchProductDetails();
     }, [id]);
 
+    
 
-    const handleAddToCart = (product) => {
-        const action = cart.some(p => p.id === product.id) ? 'REMOVE_ITEM' : 'ADD_ITEM';
-        cartDispatch({ type: action, payload: product });
+    const increase = () => {
+        setProductQuantity((quantity) => quantity + 1);
+    }
+
+    const decrease = () =>{
+        setProductQuantity((quantity) => quantity - 1);
     }
 
 
+    const handleAddToCart = (product) => {
+        const action = cart.some(p => p.id === product.id) ? 'REMOVE_ITEM' : 'ADD_ITEM';
+        cartDispatch({
+            type: action,
+            payload:{
+                ...product,
+                quantity: productQuantity
+            }
+        })
+    }
 
+
+/*
     function counterReducer(oldState, action){
         let newState= oldState;
         switch(action.type){
@@ -54,7 +71,7 @@ export function ProductDetails() {
         }
         return newState;
     }
-
+*/
 
 
     if (loading) return <div>Loading...</div>;
@@ -71,9 +88,9 @@ export function ProductDetails() {
         <p className='prod-price'>${product.price}</p>
          <p>Quantity:</p>
          <div>
-         <button onClick={()=>dispatch({type:'subtract', payload:1})} disabled = {count <= 1}>-</button>
-       <output>{count}</output>
-        <button onClick={()=>dispatch({type:'add', payload:1})}>+</button>
+         <button onClick={decrease} disabled = {productQuantity <= 1}>-</button>
+       <output>{productQuantity}</output>
+        <button onClick={increase}>+</button>
         </div>
         <button onClick={()=>handleAddToCart(product)}>
             {cart.some(p=>p.id === product.id) ? 'Remove from Cart' : 'Add To Cart'}

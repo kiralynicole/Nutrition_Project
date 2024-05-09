@@ -56,19 +56,38 @@ public class Product {
     @Column(nullable = false)
     private LocalDate expirationDate;
 
-    public Product(String name, Category category, int price, int stock, LocalDate expirationDate){
+    @Column(nullable = false)
+    private String image;
+
+    @Column(nullable = false)
+    private int quantity;
+
+    @Column
+    private String description;
+
+
+
+    public Product(String name, Category category, int price, int stock, LocalDate expirationDate, String image, int quantity){
         this.name = name;
         this.category = category;
         this.price = price;
         this.stock = stock;
         this.expirationDate = expirationDate;
+        this.image = image;
+        this.quantity = quantity;
 
+    }
 
+    public Product(String name, Category category, int price, int stock, LocalDate expirationDate, String image){
+        this.name = name;
+        this.category = category;
+        this.price = price;
+        this.stock = stock;
+        this.expirationDate = expirationDate;
+        this.image = image;
     }
 
 
 
-   // @Column(nullable = false)
-   // private String image;
 
 }

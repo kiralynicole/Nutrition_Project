@@ -82,6 +82,9 @@ public class ProductService  implements ProductInterface {
         product.setCategory(p.getCategory());
         product.setStock(p.getStock());
         product.setExpirationDate(p.getExpirationDate());
+        product.setQuantity(p.getQuantity());
+        product.setDescription(p.getDescription());
+        product.setImage(p.getImage());
         product.setPrice(p.getPrice());
         return productRepository.save(product);
     }

@@ -1,36 +1,3 @@
-
-/*
-import { useEffect } from 'react';
-import './App.css'
-import {Button, Container, ThemeProvider} from '@mui/material'
-import theme from './styles/theme';
-import AppBar from './components/appbar/AppBar';
-
-
-function App() {
-  //const [count, setCount] = useState(0)
-  useEffect(()=>{
-    document.title = "MyProtein";
-  }, []);
-
-  return (
-    <ThemeProvider theme={theme}>
-        <Container maxwidth = "xl" 
-    sx = {{background: '#fff'}}>
-
-    <AppBar></AppBar>
-
-    <Button variant='contained'>TEST</Button>
-     </Container>
-    </ThemeProvider>
-  
-  )
-}
-
-export default App;
-*/
-
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -45,11 +12,13 @@ import { Auth } from './features/Auth/Auth';
 import './App.css';
 import { Cart } from './features/Cart/Cart';
 import { ProductDetails } from './features/details/ProductDetails';
+import { SearchProvider } from './features/Search/SearchContext';
+import { DeliveryDetails } from './features/Delivery/DeliveryDetails';
 
 function App() {
   return (
     <AuthContextProvider>
-     
+     <SearchProvider>
         <Nav />
         <Routes>
           <Route path="/" element={<h1>Homepage</h1>} />
@@ -63,9 +32,10 @@ function App() {
           <Route path="cart" element={<Cart />} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
           <Route path = "/product/:id" element= {<ProductDetails/>}></Route>
+          <Route path = "/delivery-details" element = {<DeliveryDetails/>}></Route>
         </Routes>
         <ToastContainer />
-     
+     </SearchProvider>
     </AuthContextProvider>
   );
 }

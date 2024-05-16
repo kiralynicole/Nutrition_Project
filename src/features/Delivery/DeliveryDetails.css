@@ -1,0 +1,30 @@
+body {
+    display: flex;
+    align-items: center;  
+    justify-content: center;  
+    min-height: 100vh;  
+    margin: 0;  
+  }
+
+
+.form-container{
+    display:flex;
+    background-color: #f4f4f4;  
+    border: 1px solid #ccc;
+    flex-direction: column;
+}
+
+.form-row{
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+label{
+    margin-right: 10px;
+}
+.error {
+    color: #d32f2f; 
+    font-size: 0.875em; 
+    margin-top: 5px;
+} 

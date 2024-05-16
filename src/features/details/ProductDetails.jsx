@@ -56,23 +56,6 @@ export function ProductDetails() {
     }
 
 
-/*
-    function counterReducer(oldState, action){
-        let newState= oldState;
-        switch(action.type){
-            case 'add':
-                newState = oldState + action.payload;
-                break;
-            case 'subtract':
-                newState = oldState - action.payload;
-                break;
-                default:
-                    throw new Error(`Action ${action.type} is not implemented`)
-        }
-        return newState;
-    }
-*/
-
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
@@ -85,7 +68,7 @@ export function ProductDetails() {
         <div >
         <h1>{product.name}</h1>
         <p>{product.description}</p>
-        <p className='prod-price'>${product.price}</p>
+        <p className='prod-price'>${product.price * productQuantity}</p>
          <p>Quantity:</p>
          <div>
          <button onClick={decrease} disabled = {productQuantity <= 1}>-</button>

@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 
-
 function BrandNavLink({ children, ...props }) {
   return (
     <NavLink
@@ -24,6 +23,9 @@ export function Nav() {
   const [showSearch, setShowSearch] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [isCartVisible, setIsCartVisible] = useState(false);
+
+
+
 
   const toggleCart = ()=> setIsCartVisible(!isCartVisible);
 

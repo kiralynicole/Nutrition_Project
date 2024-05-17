@@ -85,7 +85,7 @@ public class UserService implements UserInterface {
      */
     public User getUserByName(String name) {
         return userRepository.findByName(name)
-                .orElseThrow(() -> new RuntimeException("Product not found for name: " + name));
+                .orElseThrow(() -> new RuntimeException("User not found for name: " + name));
     }
 
     /**
@@ -95,7 +95,16 @@ public class UserService implements UserInterface {
      * @return the created {@link User}
      */
     public User createUser(User u) {
-        return userRepository.save(u);
+        List<User> users = getAllUsers();
+        boolean emailFound = false;
+        for(User u1 : users){
+            if(u1.getName().equals(u.getName())){
+                emailFound = true;
+            }
+        }
+        if(emailFound == false) return userRepository.save(u);
+        return null;
+
     }
 
 
@@ -182,6 +191,17 @@ public class UserService implements UserInterface {
 
     }
 
-    
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found for email: " + email));
+    }
 
+    @Override
+    public User getUserLogin(String email, String password) {
+        return userRepository.findByLogin(email,password)
+                .orElseThrow(() -> new RuntimeException("User not found for login: " + email));
+    }
 }
+
+

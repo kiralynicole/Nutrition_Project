@@ -60,6 +60,18 @@ public class UserController {
         return userInterface.getUserByName(name);
     }
 
+    @GetMapping("/findEmail/{email}")
+    public User findUserByEmail(@PathVariable String email) throws InvalidException {
+        return userInterface.getUserByEmail(email);
+    }
+
+    @GetMapping("/login/{email}/{password}")
+    public User findUserAtLogin(@PathVariable String email,@PathVariable String password) throws InvalidException{
+        return userInterface.getUserLogin(email,password);
+    }
+
+
+
     /**
      * Adds a new user.
      *

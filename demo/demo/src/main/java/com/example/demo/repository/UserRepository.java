@@ -4,6 +4,7 @@ package com.example.demo.repository;
 import com.example.demo.model.Product;
 import com.example.demo.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -25,6 +26,12 @@ public interface UserRepository extends JpaRepository<User, Integer> {
      * @param name The name of the user to find.
      * @return An {@link Optional} containing the found user if present; otherwise, an empty {@link Optional}.
      */
+    @Query("SELECT u FROM User u WHERE u.name = ?1")
     Optional<User> findByName(String name);
 
+    @Query("SELECT u FROM User u WHERE u.email = ?1")
+    Optional<User> findByEmail(String email);
+
+    @Query("SELECT u FROM User u WHERE u.email = ?1 AND u.password = ?2")
+    Optional<User> findByLogin(String email, String password);
 }

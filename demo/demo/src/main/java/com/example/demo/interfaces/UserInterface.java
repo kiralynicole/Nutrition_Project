@@ -73,4 +73,8 @@ public interface UserInterface {
      * @throws RuntimeException If the user is not found, is not an administrator, or if the operation fails.
      */
     void removeSale(int id);
+
+    User getUserByEmail(String email);
+
+    User getUserLogin(String email, String password);
 }

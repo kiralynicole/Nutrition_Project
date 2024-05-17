@@ -19,9 +19,7 @@ import lombok.*;
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
-@Builder
 @ToString
 public class User {
 
@@ -41,7 +39,7 @@ public class User {
     /**
      * The user's address. This field is not nullable.
      */
-    @Column (nullable = false)
+    @Column ()
     private String address;
 
     /**
@@ -59,7 +57,7 @@ public class User {
     /**
      * The user's phone number. This field is not nullable.
      */
-    @Column(nullable=false)
+    @Column()
     private String phone;
 
     /**
@@ -97,5 +95,13 @@ public class User {
         this.password = pass;
 
     }
+
+    public User(String name, String email, String pass){
+        this.name = name;
+        this.email = email;
+        this.password = pass;
+    }
+
+
 
 }

@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+
+}
+
+img {
+    width: 1000px;
+    height: auto;
+}
+.footer {
+    margin-top: 100px;
+    width: 100%;
+    background-color: #f2f2f2;
+    text-align: center;
+}
+
+.footer h2 {
+    color: #333; 
+}
+
+.footer p {
+    color: #666; 
+    margin: 5px 0; 
+}
+
+.contact-info,
+.admin-info,
+.delivery-info {
+    margin-bottom: 20px;
+}
+
+
+
+@media (min-width: 768px) {
+    .footer {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+}

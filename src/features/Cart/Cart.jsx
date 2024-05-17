@@ -9,6 +9,7 @@ export function Cart(){
 
     const{dispatch: dispatchCart, cart} = useCart();
     const [totalPrice, setTotalPrice] = useState(0);
+    const [deliveryPrice, setDeliveryPrice] = useState(0); 
     const navigation = useNavigate();
 
     function handleRemove(product){
@@ -17,6 +18,12 @@ export function Cart(){
 
     useEffect(()=>{
         const newTotalPrice = cart.reduce((acc, product) => acc + product.quantity * product.price, 0);
+        if(newTotalPrice >= 200) {
+            setDeliveryPrice(0);
+        }else{
+            setDeliveryPrice(10);
+        }
+        console.log(deliveryPrice)
         setTotalPrice(newTotalPrice);
 
     }, [cart]);
@@ -76,7 +83,10 @@ export function Cart(){
                                 </div>
                             </div>
                         ))}
-                        <div className="total-price">Total price : ${totalPrice}</div>
+                        <div >Price : ${totalPrice}</div>
+                        <div >Delivery price : ${deliveryPrice}</div>
+                        <div className="total-price">Total price : ${deliveryPrice + totalPrice}</div>
+
                         <button className="order-button" onClick={handleAddOrder}>Send Order</button>
                     </>
                 )}

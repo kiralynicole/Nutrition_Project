@@ -17,13 +17,22 @@ export function AuthContextProvider({ children }) {
   });
 
   function login(data) {
-    localStorage.setItem('auth', JSON.stringify(data));
-    setAuth(data);
+    localStorage.setItem('auth', JSON.stringify({
+      ...data,
+      isAuthenticated: true
+    }));
+    setAuth({
+      user: data,
+      isAuthenticated: true
+    });
   }
 
   function logout() {
     localStorage.removeItem('auth');
-    setAuth(initialValue);
+    setAuth({
+      user: initialValue,
+      isAuthenticated:false
+  });
   }
 
   return (

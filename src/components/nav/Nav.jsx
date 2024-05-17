@@ -19,7 +19,7 @@ function BrandNavLink({ children, ...props }) {
 
 
 export function Nav() {
-  const { user, logout } = useAuthContext();
+
   const [showSearch, setShowSearch] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [isCartVisible, setIsCartVisible] = useState(false);
@@ -90,22 +90,6 @@ export function Nav() {
         </form>
       )}
 
-        {user && (
-          <li className={styles.shiftRight}>
-            Welcome, {user.firstName}!
-            <a
-              href="/"
-              onClick={(e) => {
-                e.preventDefault();
-                logout();
-              }}
-            >
-              Logout
-            </a>
-          </li>
-        )}
-
-        {!user && (
           <>
             <li className={styles.shiftRight}>
               <BrandNavLink to="login">Login</BrandNavLink>
@@ -114,7 +98,7 @@ export function Nav() {
               <BrandNavLink to="register">Register</BrandNavLink>
             </li>
           </>
-        )}
+       
          <li>
               <BrandNavLink to="cart" onClick = {toggleCart}>
                 <FontAwesomeIcon icon = {faShoppingCart} />

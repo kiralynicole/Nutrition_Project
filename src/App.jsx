@@ -8,12 +8,14 @@ import { Snacks } from './features/Snacks/Snacks';
 import { Creatine } from './features/Creatine/Creatine';
 import { Vegan } from './features/Vegan/Vegan';
 import { Vitamins } from './features/Vitamins/Vitamins';
-import { Auth } from './features/Auth/Auth';
+import { Login} from './features/Auth/Login';
+import { Register } from './features/Auth/Register';
 import './App.css';
 import { Cart } from './features/Cart/Cart';
 import { ProductDetails } from './features/details/ProductDetails';
 import { SearchProvider } from './features/Search/SearchContext';
 import { DeliveryDetails } from './features/Delivery/DeliveryDetails';
+import {HomePage} from './features/home/HomePage';
 
 function App() {
   return (
@@ -21,14 +23,14 @@ function App() {
      <SearchProvider>
         <Nav />
         <Routes>
-          <Route path="/" element={<h1>Homepage</h1>} />
+          <Route path="/" element={<HomePage></HomePage>} />
           <Route path="proteins" element={<Proteins />} />
           <Route path="snacks" element={<Snacks />} />
           <Route path="creatine" element={<Creatine />} />
           <Route path="vitamins" element={<Vitamins />} />
           <Route path="vegan" element={<Vegan />} />
-          <Route path="login" element={<Auth />} />
-          <Route path="register" element={<Auth />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
           <Route path="cart" element={<Cart />} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
           <Route path = "/product/:id" element= {<ProductDetails/>}></Route>

@@ -10,6 +10,8 @@ export function DeliveryDetails(){
     const [phone, setPhone] = useState('');
     const [errors, setErrors] = useState({});
 
+    
+
     function validateFields(){
         let newErrors = {};
         if(!firstName.trim()) newErrors.firstName = "First name is required";
@@ -31,8 +33,25 @@ export function DeliveryDetails(){
     }
 
     function handleOrder(){
-        if(validateFields())
-        alert("Thank you! Your order has been placed successfully.");
+        if(validateFields()){
+       
+    
+        fetch(`http://localhost:8080/users/findEmail/${email}`,{
+        method: 'GET'
+    }).then(res=>{
+        if(!res.ok){
+            throw new Error("email not found");
+        }
+        return res.json();
+    }).then(data=>{
+        console.log(data);  
+      alert("Thank you! Your order has been placed successfully.");
+
+    }).catch(()=>{
+        alert("You don't have an account. Try to register.");
+    });
+
+}
     }
 
     return (

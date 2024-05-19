@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 
+
 function BrandNavLink({ children, ...props }) {
   return (
     <NavLink
@@ -18,13 +19,13 @@ function BrandNavLink({ children, ...props }) {
 
 
 
-export function Nav() {
+export function Nav({onSearch}) {
 
   const [showSearch, setShowSearch] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [isCartVisible, setIsCartVisible] = useState(false);
 
-
+  const {user, isAuthenticated, login, logout} = useAuthContext();
 
 
   const toggleCart = ()=> setIsCartVisible(!isCartVisible);
@@ -45,6 +46,9 @@ export function Nav() {
     //this function will search for some words in page
     event.preventDefault();
     console.log("Searching for: ", searchText);
+    if (searchText.trim() !== "") {
+      onSearch(searchText);
+    }
     setShowSearch(!showSearch);
     setSearchText("");
   }
@@ -90,6 +94,7 @@ export function Nav() {
         </form>
       )}
 
+      {!isAuthenticated && (
           <>
             <li className={styles.shiftRight}>
               <BrandNavLink to="login">Login</BrandNavLink>
@@ -98,6 +103,15 @@ export function Nav() {
               <BrandNavLink to="register">Register</BrandNavLink>
             </li>
           </>
+
+      )};
+
+      {isAuthenticated && (
+        <div className={styles.shiftRight }>
+        <p>Welcome, {user?.name}</p>
+        <button onClick={logout} className={styles.logoutButton}>Logout</button>
+        </div>
+      )}
        
          <li>
               <BrandNavLink to="cart" onClick = {toggleCart}>

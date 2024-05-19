@@ -9,7 +9,7 @@ export function Creatine(){
             .then(response => response.json())
             .then(allProducts => {
                 console.log("Fetched products:", allProducts);
-                const proteinProducts = allProducts.filter(product => product.category == 'CREATINE');
+                const proteinProducts = allProducts.filter(product => product.category === 'CREATINE');
                 setProducts(proteinProducts);
             })
             .catch(error => {

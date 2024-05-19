@@ -1,23 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 
-import './Protein.css';
+import './Product.css';
 
-export const Proteins = () => {
+export const Product = ({category, search}) => {
     const [products, setProducts] = useState([]);
 
-    useEffect(() => {
-        fetch('http://localhost:8080/products')  
-            .then(response => response.json())
-            .then(allProducts => {
-                console.log("Fetched products:", allProducts);
-                const proteinProducts = allProducts.filter(product => product.category == 'PROTEINMEALS');
-                setProducts(proteinProducts);
-            })
-            .catch(error => {
+    useEffect( () => {
+       const fetchProducts = async () => {
+         try{
+            let url = 'http://localhost:8080/products';  
+
+           if(search){
+            url = `http://localhost:8080/products/searchInput/${search}`
+           }
+
+            const response = await fetch(url);
+            const allProducts = await response.json();
+            const filteredProducts = allProducts.filter(product => product.category === category);
+                setProducts(filteredProducts);
+            }
+        catch(error) {
                 console.error('Error fetching products:', error);
-            });
-    }, []);
+        }
+    };
+
+    fetchProducts();
+    }, [category, search]);
 
     useEffect(() => {
         console.log('Component did update');

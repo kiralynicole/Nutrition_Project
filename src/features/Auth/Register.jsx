@@ -1,7 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup'; 
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from './AuthContextProvider';
+
 
 
 const validationSchema = yup.object({
@@ -22,8 +24,8 @@ const validationSchema = yup.object({
 
 export function Register(){
 
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [userName, setUserName] = useState('');
+    const {user, isAuthenticated, login, logout} = useAuthContext();
+    const navigate = useNavigate();
 
 
     const { register, handleSubmit, formState: { errors } } = useForm({
@@ -52,26 +54,30 @@ export function Register(){
             }
             return response.json();
         }).then(data=>{
-            setIsAuthenticated(true);
-                setUserName(data.name);
+            login(data);
             console.log('Success:', data);
         }).catch(()=>{
             alert('You already have an account on this email.');
         });
     
     }
+
+    if (isAuthenticated){
+        return(
+            <>
+            <h1>Hello, {user?.name}</h1>
+            <p>Welcome back! Check out our latest protein products that can help you reach your fitness goals faster. Don't miss our exclusive deals just for you.</p>
+                <button onClick={() => navigate('/')}>Shop Now</button>
+                <button onClick = {logout}>Logout</button>
+            </>
+        );
+        
+    }
    
 
     return (
 
-        isAuthenticated ? (
-            <>
-            <h1>Hello, {userName}</h1>
-            <p>Welcome back! Check out our latest protein products that can help you reach your fitness goals faster. Don't miss our exclusive deals just for you.</p>
-                <button onClick={() => window.location.href = '/'}>Shop Now</button>
-            </>
-        ) : (
-
+       
         <form className="brandForm" onSubmit={handleSubmit(onSubmit)}>
           <h1 className="fullWidth">Register</h1>
           <label htmlFor="email">Email</label>
@@ -97,7 +103,6 @@ export function Register(){
           <button type="submit" className="btn secondColumn">Register
           </button>
         </form>
-        )
       );
     
 }

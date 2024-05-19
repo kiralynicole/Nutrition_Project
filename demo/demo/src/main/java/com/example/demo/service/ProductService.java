@@ -6,6 +6,7 @@ import com.example.demo.interfaces.ProductInterface;
 import com.example.demo.model.Product;
 import com.example.demo.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 //implements ProductInterface
 public class ProductService  implements ProductInterface {
+
     private final ProductRepository productRepository;
 
     /**
@@ -98,6 +100,10 @@ public class ProductService  implements ProductInterface {
     public String deleteProduct(int id){
         productRepository.deleteById(id);
         return "Product with id " + id + " removed";
+    }
+
+    public List<Product> getNamesProducts(String search){
+        return productRepository.getNamesProducts(search);
     }
 
 

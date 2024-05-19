@@ -98,11 +98,12 @@ public class UserService implements UserInterface {
         List<User> users = getAllUsers();
         boolean emailFound = false;
         for(User u1 : users){
-            if(u1.getName().equals(u.getName())){
+            if(u1.getEmail().equals(u.getEmail())){
                 emailFound = true;
+                break;
             }
         }
-        if(emailFound == false) return userRepository.save(u);
+        if(!emailFound) return userRepository.save(u);
         return null;
 
     }

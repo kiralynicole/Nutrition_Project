@@ -90,6 +90,10 @@ public class ProductController {
         return productInterface.deleteProduct(id);
     }
 
+    @GetMapping("/searchInput/{search}")
+    public List<Product> getNamesProducts(@PathVariable String search){
+        return productInterface.getNamesProducts(search);
+    }
 
 
 }

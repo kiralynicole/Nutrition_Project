@@ -57,4 +57,6 @@ public interface ProductInterface {
      * @return the updated {@link Product}
      */
     Product updateProduct(Product p);
+
+    List<Product> getNamesProducts(String search);
 }

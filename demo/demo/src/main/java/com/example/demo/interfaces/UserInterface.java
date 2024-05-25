@@ -64,7 +64,7 @@ public interface UserInterface {
      * @param id The ID of the administrator initiating the sale mode.
      * @throws RuntimeException If the user is not found, is not an administrator, or if the operation fails.
      */
-    void addSale(int id);
+    void addSale(int id, int discount);
 
     /**
      * Deactivates sale mode for all users if initiated by an administrator.

@@ -6,6 +6,8 @@ import com.example.demo.model.Product;
 import com.example.demo.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -74,6 +76,7 @@ public class OrderService implements OrderInterface {
      */
     @Override
     public Order createOrder(Order o) {
+        o.setDate(LocalDate.now());
         return orderRepository.save(o);
     }
 

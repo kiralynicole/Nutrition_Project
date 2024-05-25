@@ -4,6 +4,7 @@ import com.example.demo.controller.ProductController;
 import com.example.demo.exception.InvalidException;
 import com.example.demo.interfaces.ProductInterface;
 import com.example.demo.model.Product;
+import com.example.demo.model.User;
 import com.example.demo.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,5 +107,14 @@ public class ProductService  implements ProductInterface {
         return productRepository.getNamesProducts(search);
     }
 
+    public void updateProductPrices( int discount){
+        List<Product> products = productRepository.findAll();
+       for(Product p: products){
+           int newPrice = p.getPrice() - (p.getPrice() * (discount/100));
+           p.setPrice(newPrice);
+           productRepository.save(p);
+       }
+
+    }
 
 }

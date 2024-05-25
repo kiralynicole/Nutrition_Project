@@ -102,6 +102,18 @@ public class User {
         this.password = pass;
     }
 
+    public User(int id, String name, String address, String email, String pass, String phone, boolean isAdmin, boolean isSale){
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.email = email;
+        this.phone = phone;
+        this.isSale = isSale;
+        this.isAdmin = isAdmin;
+        this.password = pass;
+
+    }
+
 
 
 }

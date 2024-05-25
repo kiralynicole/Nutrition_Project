@@ -7,6 +7,7 @@ import com.example.demo.listeners.EmailMsgListener;
 import com.example.demo.model.Product;
 import com.example.demo.model.Store;
 import com.example.demo.model.User;
+import com.example.demo.repository.ProductRepository;
 import com.example.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ public class UserService implements UserInterface {
     //@Autowired
     private final UserRepository userRepository;
     private Store store = new Store();
+    private ProductService productService;
 
 
     /**
@@ -37,9 +39,11 @@ public class UserService implements UserInterface {
      *
      * @param userRepository the repository used for user persistence operations
      */
+
     @Autowired
-    public UserService(UserRepository userRepository){
+    public UserService(UserRepository userRepository, ProductService productService){
         this.userRepository = userRepository;
+        this.productService = productService;
 
     }
 
@@ -146,7 +150,7 @@ public class UserService implements UserInterface {
      * @param id the ID of the administrator requesting the sale mode activation
      * @throws RuntimeException if the user does not exist or is not an administrator
      */
-    public void addSale(int id){
+    public void addSale(int id, int discount){
         User admin = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found for id: " + id));
 
@@ -158,6 +162,7 @@ public class UserService implements UserInterface {
             for(User u: users){
                 u.setSale(true);
                 userRepository.save(u);
+                productService.updateProductPrices(discount);
                 store.getNotificationService().subscribe(new EmailMsgListener(u.getEmail()));
             }
             store.newSale();

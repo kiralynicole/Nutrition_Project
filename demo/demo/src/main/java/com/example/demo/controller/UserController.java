@@ -111,9 +111,9 @@ public class UserController {
      * @param id The ID of the administrator initiating the sale mode.
      * @throws RuntimeException If the initiating user is not an administrator or does not exist.
      */
-    @PostMapping("/addSale/{id}")
-    public void addSale(@PathVariable int id){
-        userInterface.addSale(id);
+    @PostMapping("/addSale/{id}/{discount}")
+    public void addSale(@PathVariable int id, @PathVariable int discount){
+        userInterface.addSale(id, discount);
     }
 
     /**

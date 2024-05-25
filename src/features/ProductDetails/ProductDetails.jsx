@@ -1,16 +1,17 @@
-import { useState, useEffect, useReducer } from 'react';
+import { useState, useEffect, useReducer, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCart } from '../Cart/CartContext';
 import './ProductDetails.css';
+import { AuthContext } from '../Auth/AuthContextProvider';
 
 const initialCount = 1;
 
 export function ProductDetails() {
+    //const {user} = useContext(AuthContext);
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-   // const [count, dispatch] = useReducer(counterReducer, initialCount);
     const{dispatch: cartDispatch, cart} = useCart();
     const [productQuantity, setProductQuantity] = useState(1);
 

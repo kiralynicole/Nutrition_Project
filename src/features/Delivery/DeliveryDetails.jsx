@@ -1,8 +1,9 @@
+import { useCart } from "../Cart/CartContext";
 import "./DeliveryDetails.css"
 import { useState } from "react";
 
 export function DeliveryDetails(){
-
+    const {cart} = useCart();
     const[firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -32,6 +33,10 @@ export function DeliveryDetails(){
         return Object.keys(newErrors).length === 0;
     }
 
+    function generateOrderId() {
+        return Math.floor(Math.random() * 1000000); 
+    }
+
     function handleOrder(){
         if(validateFields()){
        
@@ -43,16 +48,42 @@ export function DeliveryDetails(){
             throw new Error("email not found");
         }
         return res.json();
-    }).then(data=>{
-        console.log(data);  
-      alert("Thank you! Your order has been placed successfully.");
+    }).then(user => {
+        const orderId = generateOrderId();
+        cart.forEach(item => {
 
-    }).catch(()=>{
+            const orderDetails = {
+            idUser: user.id,
+            idProduct: item.id,
+            quantity: item.quantity,
+            id: orderId
+        }
+
+    fetch("http://localhost:8080/orders/addOrder", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(orderDetails)
+        }).then(res => {
+            if (!res.ok) {
+                throw new Error('Failed to place order');
+            }
+            alert("Thank you! Your order has been placed successfully.");
+        }).catch(error => {
+            console.error('Error:', error);
+            alert("An error occurred while placing your order. Please try again.");
+        }).catch(() => {
         alert("You don't have an account. Try to register.");
     });
 
-}
+        })
+        });
+        
+
+        
     }
+}
 
     return (
     <>

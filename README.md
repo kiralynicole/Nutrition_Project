@@ -53,7 +53,7 @@ The use case diagram illustrates the interactions between a user (User) and the 
 
 ## UML Diagram
 
-![](https://github.com/kiralynicole/Nutrition_Project/blob/main/umlDiagram.png?raw=true "UML Diagram")
+![](https://github.com/kiralynicole/Nutrition_Project/blob/tema2/umlDiagram.png?raw=true "UML Diagram")
 
 The UML diagram illustrates the interactions between classes in a software system. The main classes are User, Product, Order, and Category. Relationships are managed through services (UserService, ProductService, OrderService) and controllers (UserController, ProductController, OrderController), which implement business logic and handle HTTP requests. Repositories (UserRepository, ProductRepository, OrderRepository) perform CRUD operations, abstracting database access. Interfaces (UserInterface, ProductInterface, OrderInterface) define contracts for services and repositories, promoting loose coupling. NotificationService and EmailMsgListener handle notifications and email messages. **Composition** relationships (e.g., Order with Product and User) indicate strong dependency, while **association** relationships (e.g., between services and repositories) promote flexibility and modularity, indicating that services use repositories for data operations but are not dependent on them for existence. The **implementation relationship** between a class and an interface is present when a concrete class (e.g., UserService) implements an interface (e.g., UserInterface), providing the definition of the functionality specified by the interface.
 

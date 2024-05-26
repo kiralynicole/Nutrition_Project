@@ -45,9 +45,15 @@ The conductors of interaction. Through the Controller package, we navigate the f
 
 ![](https://github.com/kiralynicole/Nutrition_Project/blob/main/dbdiagram.png?raw=true "Diagram of the database")
 
+## Use case diagram
+
+![](https://github.com/kiralynicole/Nutrition_Project/blob/tema2/useCase.png?raw=true " Use case diagram")
+
+The use case diagram illustrates the interactions between a user (User) and the system to perform various actions. The user can carry out the following operations: **login, register, search products, add to cart, modify quantity, add order details, send order, and view product details**. Each use case represents a specific functionality that the user can access, reflecting how the user interacts with the system to accomplish desired tasks.
+
 ## UML Diagram
 
-![](https://github.com/kiralynicole/Nutrition_Project/blob/tema2/umlDiagram.png?raw=true "UML Diagram")
+![](https://github.com/kiralynicole/Nutrition_Project/blob/main/umlDiagram.png?raw=true "UML Diagram")
 
 The UML diagram illustrates the interactions between classes in a software system. The main classes are User, Product, Order, and Category. Relationships are managed through services (UserService, ProductService, OrderService) and controllers (UserController, ProductController, OrderController), which implement business logic and handle HTTP requests. Repositories (UserRepository, ProductRepository, OrderRepository) perform CRUD operations, abstracting database access. Interfaces (UserInterface, ProductInterface, OrderInterface) define contracts for services and repositories, promoting loose coupling. NotificationService and EmailMsgListener handle notifications and email messages. **Composition** relationships (e.g., Order with Product and User) indicate strong dependency, while **association** relationships (e.g., between services and repositories) promote flexibility and modularity, indicating that services use repositories for data operations but are not dependent on them for existence. The **implementation relationship** between a class and an interface is present when a concrete class (e.g., UserService) implements an interface (e.g., UserInterface), providing the definition of the functionality specified by the interface.
 
